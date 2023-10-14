@@ -9,7 +9,7 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
-
+import shlex 
 
 class HBNBCommand(cmd.Cmd):
     """Contains methods to manipulate other classes"""
@@ -117,7 +117,7 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id by adding
             or updating attribute (save the change into the JSON file)
         """
-        args = line.split()
+        args = shlex.split(line)
         all_obj = storage.all()
         if len(args) != 4:
             if len(args) == 0:
