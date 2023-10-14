@@ -3,7 +3,7 @@
 from models.base_model import BaseModel
 
 
-class State:
+class State(BaseModel):
     """
     The State class that is inherited from BaseModel
     """

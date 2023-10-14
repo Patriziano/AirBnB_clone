@@ -3,13 +3,20 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """Contains methods to manipulate other classes"""
     prompt = "(hbnb) "
     # update the all_classes as new classes are added
-    all_classes = ["BaseModel"]
+    all_classes = ["BaseModel", "User", "State", "City", "Amenity",
+                   "Place", "Review"]
 
     def do_quit(self, line):
         """Quit command to exit the program"""
@@ -29,10 +36,11 @@ class HBNBCommand(cmd.Cmd):
         if len(args) != 1:
             print("** class name missing **")
             return
-        if args[0] != "BaseModel":
+        if args[0] not in HBNBCommand.all_classes:
             print("** class doesn't exist **")
             return
-        new_instance = BaseModel()
+        model_class = globals().get(args[0])
+        new_instance = model_class()
         print(new_instance.id)
         new_instance.save()
 

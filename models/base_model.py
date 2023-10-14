@@ -21,7 +21,7 @@ class BaseModel:
         from models import storage
         if kwargs:
             for key, value in kwargs.items():
-#            do not add __class__ as part of the attributes
+                # do not add __class__ as part of the attributes
                 if key == '__class__':
                     continue
                 if key in ['created_at', 'updated_at']:
@@ -60,4 +60,4 @@ class BaseModel:
         Prints all the string representation of the data structures
         """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id,
-                                    self.__dict__)
+                                     self.__dict__)
