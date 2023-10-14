@@ -118,6 +118,7 @@ class HBNBCommand(cmd.Cmd):
             or updating attribute (save the change into the JSON file)
         """
         args = line.split()
+        all_obj = storage.all()
         if len(args) != 4:
             if len(args) == 0:
                 print("** class name missing **")
@@ -130,13 +131,18 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) == 3:
                 print("** value missing **")
             return
-        all_obj = storage.all()
         if all_obj:
             for key, value in all_obj.items():
                 class_name, class_id = key.split(".")
                 if class_name == args[0] and class_id == args[1]:
-                    setattr(value, args[2], args[3])
-                    value.save()
+                    if len(args) < 4:
+                        print("** value missing **")
+                    else:
+                        try:
+                            setattr(value, args[2], eval(args[3].strip('"')))
+                        except (ValueError, SyntaxError, NameError):
+                            setattr(value, args[2], args[3].strip('"'))
+                        value.save()
 
 
 if __name__ == '__main__':
