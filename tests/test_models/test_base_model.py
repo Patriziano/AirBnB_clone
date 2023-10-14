@@ -66,3 +66,28 @@ class Test_BaseModel(unittest.TestCase):
         """Test if id is a uuid4 string (len == 36)"""
         model_1 = BaseModel()
         self.assertEqual(len(model_1.id), 36)
+
+    def test_str__(self):
+        """Test if the printing the instance of BaseModel equals
+            “[<class name>] (<self.id>) <self.__dict__>” string format
+        """
+        model_1 = BaseModel()
+        string = "[{}] ({}) {}".format(model_1.__class__.__name__,
+                                       model_1.id, model_1.__dict__)
+        self.assertEqual(string, str(model_1))
+
+    def test_return_to_dict(self):
+        """Tests attributes after converted to dictionary"""
+        # date_format = "%Y-%m-%dT%H:%M:%S.%f"
+        model_1 = BaseModel()
+        new_dict = model_1.to_dict()
+        self.assertEqual(new_dict["__class__"], "BaseModel")
+        self.assertEqual(new_dict["created_at"],
+                         model_1.created_at.isoformat())
+        self.assertEqual(new_dict["updated_at"],
+                         model_1.updated_at.isoformat())
+        self.assertEqual(type(new_dict["id"]), str)
+        self.assertEqual(type(model_1.created_at), datetime)
+        self.assertEqual(type(model_1.updated_at), datetime)
+        self.assertEqual(type(new_dict["created_at"]), str)
+        self.assertEqual(type(new_dict["updated_at"]), str)
