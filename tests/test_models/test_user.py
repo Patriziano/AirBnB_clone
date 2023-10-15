@@ -7,6 +7,7 @@ from models.user import User
 
 class Test_User(unittest.TestCase):
     """Class contains various tests for User class"""
+    user_1 = User()
 
     def test_is_subclass(self):
         """Tests if User is a subclass of BaseModel"""
@@ -37,6 +38,15 @@ class Test_User(unittest.TestCase):
         self.assertTrue(hasattr(user_1, 'password'))
         self.assertTrue(hasattr(user_1, 'first_name'))
         self.assertTrue(hasattr(user_1, 'last_name'))
+
+    def test_default_attr_values(self):
+        """tests the default set attribute values"""
+        attributes_to_check = [
+            "email", "password", "first_name", "last_name"
+        ]
+        for attribute in attributes_to_check:
+            default_val = ""
+            self.assertEqual(getattr(Test_User.user_1, attribute), default_val)
 
     def test_to_dict_type(self):
         """To check the data type of each attribute when converted to dict"""
