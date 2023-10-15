@@ -146,7 +146,6 @@ class HBNBCommand(cmd.Cmd):
                             setattr(value, args[2], args[3].strip('"'))
                         value.save()
 
-
     def count(self, class_name):
         """
         Function to implement the count instance
@@ -184,18 +183,18 @@ class HBNBCommand(cmd.Cmd):
                 elif "update" in command:
                     name = class_name
                     if "{" not in command.split("(")[1]:
-                        class_id = command.split("(")[1].split(", ")[0].strip(')"')
-                        att_name = command.split("(")[1].split(", ")[1].strip(')"')
-                        value = command.split("(")[1].split(", ")[2].strip(')"')
-                        concat = name + " " + class_id + " " + att_name + " " + value
+                        id_ = command.split("(")[1].split(", ")[0].strip(')"')
+                        a = command.split("(")[1].split(", ")[1].strip(')"')
+                        v = command.split("(")[1].split(", ")[2].strip(')"')
+                        concat = name + " " + id_ + " " + a + " " + v
                         self.do_update(concat)
                     elif len(command.split("(")[1].split(", {")) == 2:
-                        class_id = command.split("(")[1].split(", {")[0].strip(')"')
-                        att_name = command.split("(")[1].split(", {")[1].strip(")")
+                        id_ = command.split("(")[1].split(", {")[0].strip(')"')
+                        a = command.split("(")[1].split(", {")[1].strip(")")
                         dic = eval("{" + att_name + "}")
                         for atr, val in dic.items():
-                            concat = name + " " + class_id + " " + atr + " " + str(val)
-                            self.do_update(concat)
+                            res = name + " " + id_ + " " + a + " " + str(val)
+                            self.do_update(res)
 
 
 if __name__ == '__main__':
