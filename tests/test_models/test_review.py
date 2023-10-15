@@ -27,3 +27,15 @@ class Test_Review(unittest.TestCase):
         self.assertEqual(type(review_1.user_id), str)
         self.assertEqual(type(review_1.place_id), str)
         self.assertEqual(type(review_1.text), str)
+
+    def test_to_dict_attrs(self):
+        """Tests attributes after being changed to dictionary"""
+        review_1 = Review()
+        new_dict = review_1.to_dict()
+        self.assertEqual(type(new_dict["created_at"]), str)
+        self.assertEqual(new_dict["created_at"],
+                         review_1.created_at.isoformat())
+        self.assertEqual(type(new_dict["updated_at"]), str)
+        self.assertEqual(new_dict["updated_at"],
+                         review_1.updated_at.isoformat())
+        self.assertEqual(new_dict["__class__"], "Review")

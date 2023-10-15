@@ -23,3 +23,15 @@ class TestState(unittest.TestCase):
         state_1 = State()
         state_1.name = "John"
         self.assertEqual(type(state_1.name), str)
+
+    def test_to_dict_attr(self):
+        """Tests attributes of an object when changed to dictionary"""
+        state_1 = State()
+        new_dict = state_1.to_dict()
+        self.assertEqual(type(new_dict["created_at"]), str)
+        self.assertEqual(new_dict["created_at"],
+                         state_1.created_at.isoformat())
+        self.assertEqual(type(new_dict["updated_at"]), str)
+        self.assertEqual(new_dict["updated_at"],
+                         state_1.updated_at.isoformat())
+        self.assertEqual(new_dict["__class__"], "State")

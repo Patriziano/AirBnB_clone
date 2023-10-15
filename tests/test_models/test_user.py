@@ -27,3 +27,14 @@ class Test_User(unittest.TestCase):
         self.assertEqual(type(user_1.email), str)
         self.assertEqual(type(user_1.first_name), str)
         self.assertEqual(type(user_1.password), str)
+
+    def test_to_dict_type(self):
+        """To check the data type of each attribute when converted to dict"""
+        user_1 = User()
+        new_dict = user_1.to_dict()
+        self.assertEqual(type(new_dict["created_at"]), str)
+        self.assertEqual(type(new_dict["updated_at"]), str)
+        self.assertEqual(new_dict["created_at"], user_1.created_at.isoformat())
+        self.assertEqual(new_dict["updated_at"], user_1.updated_at.isoformat())
+        self.assertEqual(type(new_dict["__class__"]), str)
+        self.assertEqual(new_dict["__class__"], "User")
