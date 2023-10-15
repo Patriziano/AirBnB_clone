@@ -9,6 +9,7 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -72,6 +73,7 @@ class HBNBCommand(cmd.Cmd):
             (save the change into the JSON file)
         """
         args = line.split()
+        print(f"args: {args}")
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -117,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id by adding
             or updating attribute (save the change into the JSON file)
         """
-        args = line.split()
+        args = shlex.split(line)
         all_obj = storage.all()
         if len(args) != 4:
             if len(args) == 0:
@@ -143,6 +145,57 @@ class HBNBCommand(cmd.Cmd):
                         except (ValueError, SyntaxError, NameError):
                             setattr(value, args[2], args[3].strip('"'))
                         value.save()
+
+
+    def count(self, class_name):
+        """
+        Function to implement the count instance
+        """
+        objs = storage.all()
+        num_objs = 0
+        for name_id in objs.keys():
+            if name_id.split(".")[0] == class_name:
+                num_objs += 1
+        print(num_objs)
+
+    def default(self, line):
+        """
+        Default method for all instance commands
+        """
+        args = line.split(".")
+        class_name = args[0]
+        command = args[1]
+        if class_name in HBNBCommand.all_classes and len(args) > 1:
+            if command == "all()":
+                # Handle all() command
+                self.do_all(class_name)
+            elif command == "count()":
+                # Handle count() command
+                self.count(class_name)
+            else:
+                if "show" in command:
+                    class_id = command.split("(")[1].strip(')"')
+                    concat = class_name + " " + class_id
+                    self.do_show(concat)
+                elif "destroy" in command:
+                    class_id = command.split("(")[1].strip(')"')
+                    concat = class_name + " " + class_id
+                    self.do_destroy(concat)
+                elif "update" in command:
+                    name = class_name
+                    if "{" not in command.split("(")[1]:
+                        class_id = command.split("(")[1].split(", ")[0].strip(')"')
+                        att_name = command.split("(")[1].split(", ")[1].strip(')"')
+                        value = command.split("(")[1].split(", ")[2].strip(')"')
+                        concat = name + " " + class_id + " " + att_name + " " + value
+                        self.do_update(concat)
+                    elif len(command.split("(")[1].split(", {")) == 2:
+                        class_id = command.split("(")[1].split(", {")[0].strip(')"')
+                        att_name = command.split("(")[1].split(", {")[1].strip(")")
+                        dic = eval("{" + att_name + "}")
+                        for atr, val in dic.items():
+                            concat = name + " " + class_id + " " + atr + " " + str(val)
+                            self.do_update(concat)
 
 
 if __name__ == '__main__':
