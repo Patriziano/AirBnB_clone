@@ -9,7 +9,8 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
-import shlex 
+import shlex
+
 
 class HBNBCommand(cmd.Cmd):
     """Contains methods to manipulate other classes"""
