@@ -28,6 +28,13 @@ class Test_Review(unittest.TestCase):
         self.assertEqual(type(review_1.place_id), str)
         self.assertEqual(type(review_1.text), str)
 
+    def test_has_attributes(self):
+        """Tests if the class has the attributes"""
+        review_1 = Review()
+        self.assertTrue(hasattr(review_1, 'user_id'))
+        self.assertTrue(hasattr(review_1, 'place_id'))
+        self.assertTrue(hasattr(review_1, 'text'))
+
     def test_to_dict_attrs(self):
         """Tests attributes after being changed to dictionary"""
         review_1 = Review()

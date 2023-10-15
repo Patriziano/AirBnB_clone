@@ -24,9 +24,19 @@ class Test_User(unittest.TestCase):
         user_1.email = "wedo@gmail.com"
         user_1.first_name = "John Audu"
         user_1.password = "theword"
+        user_1.last_name = "Patrick Ojewande"
         self.assertEqual(type(user_1.email), str)
         self.assertEqual(type(user_1.first_name), str)
         self.assertEqual(type(user_1.password), str)
+        self.assertEqual(type(user_1.last_name), str)
+
+    def test_has_attributes(self):
+        """Tests to verify if attributes exists"""
+        user_1 = User()
+        self.assertTrue(hasattr(user_1, 'email'))
+        self.assertTrue(hasattr(user_1, 'password'))
+        self.assertTrue(hasattr(user_1, 'first_name'))
+        self.assertTrue(hasattr(user_1, 'last_name'))
 
     def test_to_dict_type(self):
         """To check the data type of each attribute when converted to dict"""
