@@ -18,11 +18,35 @@ class TestPlace(unittest.TestCase):
         place_1 = Place()
         self.assertIsInstance(place_1, Place)
 
-    def test_name_is_string(self):
-        """Tests if attribute name is a string"""
+    def testHasAttributes(self):
+        """verify if attributes exist"""
         place_1 = Place()
-        place_1.name = "John"
-        self.assertEqual(type(place_1.name), str)
+        self.assertTrue(hasattr(place_1, 'city_id'))
+        self.assertTrue(hasattr(place_1, 'user_id'))
+        self.assertTrue(hasattr(place_1, 'name'))
+        self.assertTrue(hasattr(place_1, 'description'))
+        self.assertTrue(hasattr(place_1, 'number_rooms'))
+        self.assertTrue(hasattr(place_1, 'number_bathrooms'))
+        self.assertTrue(hasattr(place_1, 'max_guest'))
+        self.assertTrue(hasattr(place_1, 'price_by_night'))
+        self.assertTrue(hasattr(place_1, 'latitude'))
+        self.assertTrue(hasattr(place_1, 'longitude'))
+        self.assertTrue(hasattr(place_1, 'amenity_ids'))
+
+    def test_types(self):
+        """tests if the type of the attribute is the correct one"""
+        place_1 = Place()
+        self.assertIsInstance(place_1.city_id, str)
+        self.assertIsInstance(place_1.user_id, str)
+        self.assertIsInstance(place_1.name, str)
+        self.assertIsInstance(place_1.description, str)
+        self.assertIsInstance(place_1.number_rooms, int)
+        self.assertIsInstance(place_1.number_bathrooms, int)
+        self.assertIsInstance(place_1.max_guest, int)
+        self.assertIsInstance(place_1.price_by_night, int)
+        self.assertIsInstance(place_1.latitude, float)
+        self.assertIsInstance(place_1.longitude, float)
+        self.assertIsInstance(place_1.amenity_ids, list)
 
     def test_to_dict_attr(self):
         """Tests attributes of an object when changed to dictionary"""
