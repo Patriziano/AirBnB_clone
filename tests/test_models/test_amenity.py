@@ -23,3 +23,15 @@ class Test_Amenity(unittest.TestCase):
         amenity_1 = Amenity()
         amenity_1.name = "John Audu"
         self.assertEqual(type(amenity_1.name), str)
+
+    def test_to_dict_attr_type(self):
+        """Test the type of each attribute when object is changed to dict"""
+        amenity_1 = Amenity()
+        new_dict = amenity_1.to_dict()
+        self.assertEqual(type(new_dict["created_at"]), str)
+        self.assertEqual(new_dict["created_at"],
+                         amenity_1.updated_at.isoformat())
+        self.assertEqual(type(new_dict["updated_at"]), str)
+        self.assertEqual(new_dict["updated_at"],
+                         amenity_1.updated_at.isoformat())
+        self.assertEqual(new_dict["__class__"], "Amenity")
