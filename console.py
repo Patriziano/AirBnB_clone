@@ -142,8 +142,9 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         try:
                             setattr(value, args[2], eval(args[3].strip('"')))
-                        except (ValueError, SyntaxError, NameError):
-                            setattr(value, args[2], args[3].strip('"'))
+                        except (KeyError, ValueError, SyntaxError, NameError):
+                            pass
+                            # setattr(value, args[2], args[3].strip('"'))
                         value.save()
 
     def count(self, class_name):
