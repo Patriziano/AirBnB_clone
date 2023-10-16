@@ -35,3 +35,13 @@ class Test_Amenity(unittest.TestCase):
         self.assertEqual(new_dict["updated_at"],
                          amenity_1.updated_at.isoformat())
         self.assertEqual(new_dict["__class__"], "Amenity")
+
+    def test_has_attr(self):
+        """Tests attributes of Amenity class"""
+        amenity_1 = Amenity()
+        self.assertTrue(hasattr(amenity_1, "name"))
+
+    def test_attr_type(self):
+        """Tests attributes type"""
+        amenity_1 = Amenity()
+        self.assertIsInstance(amenity_1.name, str)

@@ -35,3 +35,15 @@ class Test_City(unittest.TestCase):
         self.assertEqual(type(new_dict["updated_at"]), str)
         self.assertEqual(new_dict["updated_at"], city_1.updated_at.isoformat())
         self.assertEqual(new_dict["__class__"], "City")
+
+    def test_has_attr(self):
+        """Tests attributes for City class"""
+        city_1 = City()
+        self.assertTrue(hasattr(city_1, "state_id"))
+        self.assertTrue(hasattr(city_1, "name"))
+
+    def test_attr_type(self):
+        """Tests attributes type"""
+        city_1 = City()
+        self.assertIsInstance(city_1.state_id, str)
+        self.assertIsInstance(city_1.name, str)

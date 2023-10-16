@@ -35,3 +35,13 @@ class TestState(unittest.TestCase):
         self.assertEqual(new_dict["updated_at"],
                          state_1.updated_at.isoformat())
         self.assertEqual(new_dict["__class__"], "State")
+
+    def test_has_attr(self):
+        """Tests if state has the required attributes"""
+        state_1 = State()
+        self.assertTrue(hasattr(state_1, "name"))
+
+    def test_attr_type(self):
+        """Tests attributes types"""
+        state_1 = State()
+        self.assertIsInstance(state_1.name, str)
