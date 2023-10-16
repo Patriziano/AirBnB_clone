@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
         """
         args = shlex.split(line)
         all_obj = storage.all()
-        if len(args) != 4:
+        if len(args) < 4:
             if len(args) == 0:
                 print("** class name missing **")
             elif args[0] not in HBNBCommand.all_classes:
@@ -145,6 +145,8 @@ class HBNBCommand(cmd.Cmd):
                         except (ValueError, SyntaxError, NameError):
                             setattr(value, args[2], args[3].strip('"'))
                         value.save()
+                        return
+        print("** no instance found **")
 
     def count(self, class_name):
         """
