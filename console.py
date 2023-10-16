@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
         """
         args = shlex.split(line)
         all_obj = storage.all()
-        if len(args) != 4:
+        if len(args) < 4:
             if len(args) == 0:
                 print("** class name missing **")
             elif args[0] not in HBNBCommand.all_classes:
