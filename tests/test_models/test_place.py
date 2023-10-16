@@ -7,6 +7,7 @@ import unittest
 
 class TestPlace(unittest.TestCase):
     """Class for Place class test"""
+    place_1 = Place()
 
     def test_is_subclass(self):
         """Tests if Place is a subclass of BaseModel"""
@@ -47,6 +48,25 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(place_1.latitude, float)
         self.assertIsInstance(place_1.longitude, float)
         self.assertIsInstance(place_1.amenity_ids, list)
+
+    def test_attr_values(self):
+        """Test to check for the default value of attributes"""
+        attributes = [
+            "city_id", "user_id", "name", "description", "number_rooms",
+            "number_bathrooms", "max_guest", "price_by_night", "latitude",
+            "longitude", "amenity_ids"
+        ]
+
+        for attr in attributes:
+            if not isinstance(getattr(TestPlace.place_1, attr), list):
+                default_val = "" \
+                    if isinstance(getattr(TestPlace.place_1, attr), str)\
+                    else 0
+            else:
+                default_val = []
+
+            self.assertEqual(getattr(TestPlace.place_1, attr),
+                             default_val)
 
     def test_to_dict_attr(self):
         """Tests attributes of an object when changed to dictionary"""
