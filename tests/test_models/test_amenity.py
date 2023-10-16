@@ -8,6 +8,8 @@ from models.amenity import Amenity
 class Test_Amenity(unittest.TestCase):
     """Tests for the Amenity class"""
 
+    amenity_1 = Amenity()
+
     def test_is_subclass(self):
         """Tests if Amenity is a subclass of BaseModel"""
         amenity_1 = Amenity()
@@ -45,3 +47,7 @@ class Test_Amenity(unittest.TestCase):
         """Tests attributes type"""
         amenity_1 = Amenity()
         self.assertIsInstance(amenity_1.name, str)
+
+    def test_attr_value(self):
+        """Tests for attribute value"""
+        self.assertEqual(getattr(Test_Amenity.amenity_1, "name"), "")
