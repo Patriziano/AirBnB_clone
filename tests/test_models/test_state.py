@@ -45,3 +45,8 @@ class TestState(unittest.TestCase):
         """Tests attributes types"""
         state_1 = State()
         self.assertIsInstance(state_1.name, str)
+
+    def test_attr_value(self):
+        """Tests attributes value"""
+        state_1 = State()
+        self.assertEqual(getattr(state_1, "name"), "")

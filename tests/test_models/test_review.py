@@ -46,3 +46,10 @@ class Test_Review(unittest.TestCase):
         self.assertEqual(new_dict["updated_at"],
                          review_1.updated_at.isoformat())
         self.assertEqual(new_dict["__class__"], "Review")
+
+    def test_attr_value(self):
+        """Tests attributes value"""
+        review_1 = Review()
+        self.assertEqual(getattr(review_1, "user_id"), "")
+        self.assertEqual(getattr(review_1, "place_id"), "")
+        self.assertEqual(getattr(review_1, "text"), "")
