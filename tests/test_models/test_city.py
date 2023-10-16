@@ -47,3 +47,9 @@ class Test_City(unittest.TestCase):
         city_1 = City()
         self.assertIsInstance(city_1.state_id, str)
         self.assertIsInstance(city_1.name, str)
+
+    def test_attr_value(self):
+        """Tests for attributes value"""
+        city_1 = City()
+        self.assertEqual(getattr(city_1, "state_id"), "")
+        self.assertEqual(getattr(city_1, "name"), "")
