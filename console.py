@@ -120,18 +120,23 @@ class HBNBCommand(cmd.Cmd):
             or updating attribute (save the change into the JSON file)
         """
         args = shlex.split(line)
+        # args = line.split()
         all_obj = storage.all()
-        if len(args) < 4:
-            if len(args) == 0:
-                print("** class name missing **")
-            elif args[0] not in HBNBCommand.all_classes:
-                print("** class doesn't exist **")
-            elif len(args) == 1:
-                print("** instance id missing **")
-            elif len(args) == 2:
-                print("** attribute name missing **")
-            elif len(args) == 3:
-                print("** value missing **")
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        elif args[0] not in HBNBCommand.all_classes:
+            print("** class doesn't exist **")
+            return
+        elif len(args) == 1:
+            print("** instance id missing **")
+            return
+        elif len(args) < 3:
+            print("** attribute name missing **")
+            return
+        # elif len(args) == 3:
+        elif len(args) < 4:
+            print("** value missing **")
             return
         if all_obj:
             for key, value in all_obj.items():
@@ -141,9 +146,11 @@ class HBNBCommand(cmd.Cmd):
                         print("** value missing **")
                     else:
                         try:
-                            setattr(value, args[2], eval(args[3].strip('"')))
-                        except (ValueError, SyntaxError, NameError):
-                            setattr(value, args[2], args[3].strip('"'))
+                            # setattr(value, args[2], eval(args[3].strip('"')))
+                            setattr(value, args[2], args[3])
+                        except (KeyError, ValueError, SyntaxError, NameError):
+                            pass
+                            # setattr(value, args[2], args[3].strip('"'))
                         value.save()
                         return
         print("** no instance found **")
