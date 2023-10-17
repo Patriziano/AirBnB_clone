@@ -152,6 +152,7 @@ class HBNBCommand(cmd.Cmd):
                             pass
                             # setattr(value, args[2], args[3].strip('"'))
                         value.save()
+                        return
         print("** no instance found **")
 
     def count(self, class_name):
